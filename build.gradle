@@ -1,0 +1,30 @@
+// Establish version and status
+ext.githubProjectName = rootProject.name // Change if github project name is not the same as the root project's name
+
+buildscript {
+    repositories { mavenCentral() }
+    apply from: file('gradle/buildscript.gradle'), to: buildscript
+}
+
+apply from: file('gradle/convention.gradle')
+apply from: file('gradle/maven.gradle')
+apply from: file('gradle/check.gradle')
+apply from: file('gradle/license.gradle')
+apply from: file('gradle/release.gradle')
+
+allprojects {
+    apply plugin: 'idea'
+    repositories { mavenCentral() }
+    version = release.projectVersion
+}
+
+subprojects {
+
+    group = "com.crosscommerce.${githubProjectName}" // TEMPLATE: Set to organization of project
+
+    //sourceSets.test.java.srcDir 'src/main/java'
+
+    tasks.withType(Javadoc).each {
+        it.classpath = sourceSets.main.compileClasspath
+    }
+}

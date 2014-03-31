@@ -1,0 +1,4 @@
+rootProject.name = 'resilience'
+
+include 'resiliency-aspects'
+include 'resiliency-roadshow'

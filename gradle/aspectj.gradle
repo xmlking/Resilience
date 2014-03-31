@@ -1,0 +1,12 @@
+// Dependencies for plugin was set in buildscript.gradle
+
+apply plugin: 'aspectj'
+
+/* aspectj plugin config */
+compileTestAspect {
+    xlint = 'warning'
+}
+
+compileAspect {
+    maxmem = '1024m'
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<!--
+	AspectJ load-time weaving config file to install Resiliency aspects. Lib level aop.xml
+-->
+<aspectj>
+
+    <aspects>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationGovernorAspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationFallbackAspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationCircuitBreakerAspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationRetryAspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationTimeoutAspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationTimeout2Aspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.AnnotationAsyncAspect"/>
+        <aspect name="com.crossbusiness.resiliency.aspect.SystemArchitecture"/>
+    </aspects>
+
+</aspectj>

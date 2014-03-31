@@ -1,0 +1,32 @@
+// Dependencies for cobertura plugin was set in buildscript.gradle
+subprojects {
+    // Checkstyle
+    apply plugin: 'checkstyle'
+    checkstyle {
+        ignoreFailures = true
+        configFile = rootProject.file('codequality/checkstyle.xml')
+    }
+
+    // FindBugs
+    apply plugin: 'findbugs'
+    findbugs {
+        ignoreFailures = true
+    }
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled = false
+            html.enabled = true
+        }
+    }
+
+    // PMD
+    apply plugin: 'pmd'
+    //tasks.withType(Pmd) { reports.html.enabled true }
+
+    apply plugin: 'cobertura'
+    cobertura {
+        coverageFormats = [ 'html', 'xml' ]
+        coverageIncludes = ['.*com.crossbusiness.resiliency.*']
+        coverageExcludes = ['.*com.crossbusiness.resiliency.aspect.Annotation*.*', '.*com.crossbusiness.resiliency.aspect.spring.*']
+    }
+}

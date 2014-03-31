@@ -1,0 +1,12 @@
+// Dependencies for plugin was set in buildscript.gradle
+subprojects {
+    apply plugin: 'license'
+
+    license {
+        header rootProject.file('codequality/HEADER')
+        skipExistingHeaders true
+        ext.year = Calendar.getInstance().get(Calendar.YEAR)
+        ext.name = 'CrossBusiness, Inc'
+        ext.email = 'support@crossbusiness.com'
+    }
+}

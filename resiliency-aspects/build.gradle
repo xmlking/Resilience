@@ -1,0 +1,58 @@
+
+ext.aspectjVersion = aspectJVersion
+
+/**
+ * Disable this during build process. we will be only using aspectj compiler for testing source/binary weaving.
+ */
+//apply from: file('../gradle/aspectj.gradle')
+
+configurations {
+    /* To get the Spring-Instrument path for setting jvmArgs */
+    javaAgentSpringInstrument
+}
+
+dependencies {
+    // Enable this when not using aspectJ Plugin
+    compile "org.aspectj:aspectjrt:$aspectJVersion"
+
+    compile("org.springframework:spring-core:$springVersion") { transitive = false }
+    compile("org.springframework:spring-context:$springVersion") { transitive = false }
+    compile("org.springframework:spring-beans:$springVersion") { transitive = false }
+    // Using slf4j/logback for logging
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+
+    testCompile "junit:junit:$junitVersion",
+            "org.springframework:spring-test:$springVersion",
+            "org.mockito:mockito-core:$mockitoVersion",
+    testCompile("com.googlecode.catch-exception:catch-exception:1.2.0") { transitive = false }
+
+
+    testRuntime "ch.qos.logback:logback-classic:$logbackVersion",
+            "ch.qos.logback:logback-core:$logbackVersion",
+            "org.springframework:spring-expression:$springVersion",
+            "org.springframework:spring-instrument:$springVersion",
+            "org.aspectj:aspectjweaver:$aspectJVersion",
+            "org.springframework:spring-aop:$springVersion"
+
+    javaAgentSpringInstrument "org.springframework:spring-instrument:$springVersion"
+
+}
+
+/* for LTW */
+test.doFirst {
+    jvmArgs "-javaagent:${configurations.javaAgentSpringInstrument.asPath}"
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name, 'Implementation-Version': version //release.scmVersion?
+    }
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'build/repos'
+        }
+    }
+}

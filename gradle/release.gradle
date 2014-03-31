@@ -1,0 +1,11 @@
+// Dependencies for plugin was set in buildscript.gradle
+apply plugin: 'release'
+
+release {
+    failOnSnapshotDependencies = true
+    allowLocalModifications = true
+    releaseDryRun = false
+    scm = 'git'
+    username = rootProject.gitUsername
+    password = rootProject.gitPassword
+}
