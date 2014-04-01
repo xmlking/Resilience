@@ -33,6 +33,9 @@
 				<li>
 					<g:link class="list" controller="circuitBreaker">Circuit Breakers</g:link>
 				</li>
+                <li>
+                    <g:link class="list" controller="gpars">GPars</g:link>
+                </li>
 			</ul>
 		</div>
 		<div id="list-actions" class="content scaffold-list" role="main">

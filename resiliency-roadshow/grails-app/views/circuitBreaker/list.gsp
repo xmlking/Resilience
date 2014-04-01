@@ -33,6 +33,9 @@
 				<li>
 					<g:link class="list" controller="circuitBreaker">Circuit Breakers</g:link>
 				</li>
+                <li>
+                    <g:link class="list" controller="gpars">GPars</g:link>
+                </li>
 			</ul>
 		</div>
 		<div id="list-actions" class="content scaffold-list" role="main">	
@@ -72,7 +75,7 @@
 					<g:set var='circuitBreaker' value="${circuitBreakersMap[circuitBreakerBeanName]}" />
 					<tr>
 						<td>
-							<g:link action='show' id='${circuitBreaker.name}'>${circuitBreaker.name.substring(circuitBreaker.name.indexOf('(')-20 , circuitBreaker.name.indexOf(')')+1)}
+							<g:link action='show' params="[cb_name: circuitBreaker.name]">${circuitBreaker.name.substring(circuitBreaker.name.indexOf('(')-20 , circuitBreaker.name.indexOf(')')+1)}
 							</g:link>
 						</td>
 						<td>${circuitBreaker.failureThreshold}</td>
