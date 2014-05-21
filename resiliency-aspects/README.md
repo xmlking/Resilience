@@ -2,9 +2,12 @@
 
 Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.com/Netflix/Hystrix/wiki/How-it-Works)
 
-Netflix Hystrix framework is great for using with new projects but it may not be suitable for adopting to existing/legacy projects.
-We created a set of resilience annotations that can be applied to any java projects via AspectJ weaving or Spring proxy based AOP.
+Netflix Hystrix framework is great for using with new projects but it may not be suitable for applying to existing/legacy projects.
+We created a set of resilience annotations that can be applied to any java/grails projects via AspectJ weaving or Spring proxy based AOP.
 
+###Release
+    ./gradlew :resiliency-aspects:jar -PreleaseVersion=1.0.1
+ 
 ###Getting Started
 1. Keep the released jar file in your project's class path.
 
@@ -82,10 +85,10 @@ Access test results at `Resilience/resiliency-aspects/build/reports/tests/index.
 
 ###Future
 Grails Promises with Reactor plugin will eliminate need for @Async , @Timeout aspects.
-Reactor Framework allows to switch underling dispatcher implementation for Promises from event-loop(single threaded) to thread pools(multi threaded).
+Reactor Framework allows to switch underling dispatcher implementation of Promises from event-loop(single threaded) to thread pools(multi threaded).
 See the Promises examples in [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
 
 ###References
 
     https://github.com/reactor/reactor/wiki/Promises
-    http://gpars.org/1.1.0/guide/guide/single.html
+    http://gpars.org/1.2.1/guide/guide/single.html

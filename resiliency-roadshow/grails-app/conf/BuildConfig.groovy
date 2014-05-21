@@ -54,27 +54,29 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+
+        compile "org.springframework:spring-orm:$springVersion"
     }
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.52"
+        build ":tomcat:7.0.53"
 
         // plugins for the compile step
-        compile ":scaffolding:2.0.2"
-        compile ':cache:1.1.1'
-        compile ":asset-pipeline:1.6.1"
-        compile ":spring-websocket:1.0.0.M1"
-
-        // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.5.5"
-        //compile ":less-asset-pipeline:1.5.3"
-        //compile ":coffee-asset-pipeline:1.5.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.1"
+        compile ":scaffolding:2.1.0"
+        compile ':cache:1.1.6'
+        compile ":asset-pipeline:1.8.7"
+        compile ":spring-websocket:1.0.0.RC2"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.8" // or ":hibernate4:4.3.1.2"
-        runtime ":database-migration:1.3.8"
-        runtime ":jquery:1.11.0.2"
+        runtime ":hibernate4:4.3.5.3" // or ":hibernate:3.6.10.15"
+        runtime ":database-migration:1.4.0"
+        runtime ":jquery:1.11.1"
+
+        // Uncomment these to enable additional asset-pipeline capabilities
+        //compile ":sass-asset-pipeline:1.7.4"
+        //compile ":less-asset-pipeline:1.7.0"
+        //compile ":coffee-asset-pipeline:1.7.0"
+        //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }

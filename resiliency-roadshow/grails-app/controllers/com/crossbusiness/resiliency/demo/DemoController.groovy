@@ -61,12 +61,12 @@ class DemoController {
         render ([symbols, prices].transpose().inject([:]) { a, b -> a[b[0]] = b[1]; a })
     }
 
-    def testAsyncFlowWithPromise(@RequestParameter('a') String arg1) {
-        render demoService.asyncFlowWithPromise(arg1)
+    def testMashupAsyncTasksUsingGrailsPromises(@RequestParameter('a') String arg1) {
+        render demoService.mashupAsyncTasksUsingGrailsPromises(arg1)
     }
 
-    def testAsyncFlowWithPromisesUsingControlledThreadPools(@RequestParameter('a') String arg1) {
-        render demoService.asyncFlowWithPromisesUsingControlledThreadPools(arg1)
+    def testAsyncTasksUsingGrailsPromisesAndControlledThreadPools(@RequestParameter('a') String arg1) {
+        render demoService.asyncTasksUsingGrailsPromisesAndControlledThreadPools(arg1)
     }
 
 /** Calls to get(...) result in a java.util.concurrent.CancellationException being thrown.

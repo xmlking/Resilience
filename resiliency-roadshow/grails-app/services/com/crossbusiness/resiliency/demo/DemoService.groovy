@@ -1,18 +1,18 @@
 package com.crossbusiness.resiliency.demo
 
-import grails.async.PromiseList
+
 import grails.transaction.Transactional
 import groovyx.gpars.group.DefaultPGroup
 import groovyx.gpars.scheduler.DefaultPool
-import groovyx.gpars.scheduler.Pool
-import groovyx.gpars.scheduler.ResizeablePool
 import org.grails.async.factory.gpars.GparsPromise
 
 import javax.annotation.PostConstruct
 import java.util.concurrent.TimeoutException
 
-import static grails.async.Promises.*
+import grails.async.PromiseList
 import grails.async.Promise
+import static grails.async.Promises.*
+
 import com.crossbusiness.resiliency.annotation.*
 import com.crossbusiness.resiliency.exception.*
 import com.crossbusiness.resiliency.annotation.Governor.GovernorType
@@ -21,21 +21,21 @@ import java.util.concurrent.TimeUnit
 import org.springframework.core.task.TaskRejectedException
 import org.springframework.scheduling.annotation.AsyncResult
 
+
+
 @Transactional(readOnly = true)
 class DemoService {
     def grailsApplication
 
-    //def group1 = new DefaultPGroup(new ResizeablePool(true))
-    //def group2 = new DefaultPGroup(2)
-    def SumoThreadPoolGroup, TwoThreadPoolGroup
+    def sumoPGroup, twoPGroup
 
     @PostConstruct
     def init() {
-        SumoThreadPoolGroup = new DefaultPGroup(new DefaultPool(grailsApplication.mainContext.SumoThreadPool.threadPoolExecutor))
-        TwoThreadPoolGroup = new DefaultPGroup(new DefaultPool(grailsApplication.mainContext.TwoThreadPool.threadPoolExecutor))
+        sumoPGroup = new DefaultPGroup(new DefaultPool(grailsApplication.mainContext.SumoThreadPool.threadPoolExecutor))
+        twoPGroup = new DefaultPGroup(new DefaultPool(grailsApplication.mainContext.TwoThreadPool.threadPoolExecutor))
     }
 
-    String asyncFlowWithPromise(String arg1){
+    String mashupAsyncTasksUsingGrailsPromises(String arg1){
 
         List results = new ArrayList();
         //http://www.jsontest.com/
@@ -45,25 +45,26 @@ class DemoService {
         Promise p4 = task { "http://time.jsontest.com/".toURL().text }
         Promise p5 = task { "http://validate.jsontest.com/?json=${arg1}".toURL().text }
 
-        onComplete([p3,p4]) { List p3p4 ->
-            results << p3p4
-        }.then { p3p4 ->
-            println p3p4
-            p3p4 << waitAll(p1, p2, p5)
+        onComplete([p3,p4]) { List p3p4results ->
+            log.debug "p3 and p4 are done"
+            results << p3p4results
+        }.then {
+            results << waitAll(p1, p2, p5)
         }.get(3,TimeUnit.SECONDS)
 }
 
-    String asyncFlowWithPromisesUsingControlledThreadPools(String arg1) {
-        Promise p1 = new GparsPromise(SumoThreadPoolGroup.task {
+    String asyncTasksUsingGrailsPromisesAndControlledThreadPools(String arg1) {
+        Promise p1 = new GparsPromise(sumoPGroup.task {
             log.debug('this log should be in sumo pool')
             "http://echo.jsontest.com/YouSaid/${arg1}".toURL().text
         })
-        Promise p2 = new GparsPromise(TwoThreadPoolGroup.task {
+        Promise p2 = new GparsPromise(twoPGroup.task {
             log.debug('this log should be in two pool')
             "http://md5.jsontest.com/?text=${arg1}".toURL().text
         })
         waitAll(p1, p2)
     }
+
 
     private Future<String> await(String arg1, int count) {
         log.debug "beginning await work for ${count} seconds..."
@@ -114,8 +115,7 @@ class DemoService {
         return arg1
     }
 
-    //implicit type = ThrottleType.CONCURRENCY
-    @Governor(limit = 1)
+    @Governor(limit = 1) //implicit type = GovernorType.CONCURRENCY
     String throttleWithConcurrency(String arg1) {
         TimeUnit.SECONDS.sleep(5)
         return arg1
