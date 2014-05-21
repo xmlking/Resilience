@@ -53,9 +53,6 @@ cobertura.ser
 /web-app/WEB-INF/tld/fmt.tld
 /.link_to_grails_plugins/
 
-# AngularJS App 
-/web-app/app/
-
 # "temporary" build files
 /target/
 /out/
