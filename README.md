@@ -8,7 +8,7 @@ Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.co
 
 ### Resilience in Action : Demo on YouTube
 
-[![Live Demo](http://img.youtube.com/vi/ZyeEdjufSHE/maxresdefault.jpg)](http://youtu.be/ZyeEdjufSHE)
+[![Live Demo](./resiliencyDemo.gif)](http://youtu.be/ZyeEdjufSHE)
 
 ### Presentation on SlideShare
 
