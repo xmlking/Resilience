@@ -2,8 +2,23 @@
 
 Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.com/Netflix/Hystrix/wiki/How-it-Works)
 
-Netflix Hystrix framework is great for using with new projects but it may not be suitable for applying to existing/legacy projects.
-We created a set of resilience annotations that can be applied to any java/grails projects via AspectJ weaving or Spring proxy based AOP.
+A set of resilience annotations that can be applied to java/groovy code via AspectJ weaving or Spring proxy based AOP.
+
+* Modular, less opinionated API, easy to apply resiliency aspects to existing or new code with no boilerplate code.
+* API provided as annotations and builder pattern style DSL, for flexible applicability of aspects at Type, Method-level with annotations and block-level with DSL.
+
+###Features
+Resiliency Aspects for Java and JavaScript
+
+1. Circuit Breaker - _Real-time stats drive, self-healing micro services._
+2. Fallback - _failover, graceful degradation_
+3. Retry - _support maxTries, maxDelay, delayRatio, Backoff Strategy, intermediate callback._
+4. Governor - _resource overload protection, prevent deliberate denial-of-service attacks._
+	1. rate-limit
+    2. concurrency control
+
+
+    Async , Timeout aspects are deprecated with Grails/Ratpack's Promise (GPars, Reactor), RxJava's Observable API.
 
 ###Release
     ./gradlew :resiliency-aspects:jar -PreleaseVersion=1.0.1
