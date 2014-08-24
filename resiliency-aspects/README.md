@@ -2,23 +2,21 @@
 
 Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.com/Netflix/Hystrix/wiki/How-it-Works)
 
-A set of resilience annotations that can be applied to java/groovy code via AspectJ weaving or Spring proxy based AOP.
-
 * Modular, less opinionated API, easy to apply resiliency aspects to existing or new code with no boilerplate code.
 * API provided as annotations and builder pattern style DSL, for flexible applicability of aspects at Type, Method-level with annotations and block-level with DSL.
+* A set of resilience annotations that can be applied to java/groovy code via AspectJ weaving or Spring proxy based AOP.
 
 ###Features
 Resiliency Aspects for Java and JavaScript
 
-1. Circuit Breaker - _Real-time stats drive, self-healing micro services._
-2. Fallback - _failover, graceful degradation_
-3. Retry - _support maxTries, maxDelay, delayRatio, Backoff Strategy, intermediate callback._
-4. Governor - _resource overload protection, prevent deliberate denial-of-service attacks._
+1. **Circuit Breaker** - _Real-time stats drive, self-healing micro services._
+2. **Fallback** - _failover, graceful degradation_
+3. **Retry** - _support maxTries, maxDelay, delayRatio, Backoff Strategy, intermediate callback._
+4. **Governor** - _resource overload protection, prevent deliberate denial-of-service attacks._
 	1. rate-limit
-    2. concurrency control
-
-
-    Async , Timeout aspects are deprecated with Grails/Ratpack's Promise (GPars, Reactor), RxJava's Observable API.
+	2. concurrency control
+	
+> Async , Timeout aspects are deprecated with Grails/Ratpack's Promise (GPars, Reactor), RxJava's Observable API.
 
 ###Release
     ./gradlew :resiliency-aspects:jar -PreleaseVersion=1.0.1
