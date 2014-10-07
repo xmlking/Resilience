@@ -9,8 +9,10 @@ Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.co
 ###Features
 Resiliency Aspects for Java and JavaScript
 
-1. **Circuit Breaker** - _Prevent resource saturation, real-time stats drive for self-healing micro services._
-2. **Fallback** - _Failover: Fail Fast, Fail Silent, Fallback: Static, Stubbed, Cache, Secondary service etc., for graceful degradation_
+1. **Circuit Breaker** - _Prevent resource saturation, help you build real-time stats driven self-healing micro services._
+2. **Fallback** - for graceful degradation.
+    1. Failover: _Fail Fast, Fail Silent_
+    2. Fallback: _Static, Stubbed, Cache, Secondary service etc.,_
 3. **Retry** - _support maxTries, maxDelay, delayRatio, Exponential Backoff Strategy, intermediate callbacks for custom control._
 4. **Governor** - _resource overload protection, prevent deliberate denial-of-service attacks._
 	1. rate-limit
@@ -99,8 +101,10 @@ Access test results at `Resilience/resiliency-aspects/build/reports/tests/index.
 ###Future
 1. Grails Promises with Reactor plugin will eliminate need for _@Async , @Timeout_ aspects.
 2. __RxJava__ and __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of _Promises_ and _Observables_
-with _calling-thread, thread-pools, NIO,  actors, LMAX RingBuffer,  event-loop_.
+with _[calling-thread, thread-pools, NIO,  actors, LMAX RingBuffer,  event-loop]_.
+
 > See the Promises examples in [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
+
 3. Watch out for [Reactive Streams](https://github.com/reactive-streams/reactive-streams) Spec which is promising to standardize reactive programming model.
 
 ###References
