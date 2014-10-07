@@ -9,14 +9,14 @@ Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.co
 ###Features
 Resiliency Aspects for Java and JavaScript
 
-1. **Circuit Breaker** - _Real-time stats drive, self-healing micro services._
-2. **Fallback** - _failover, graceful degradation_
-3. **Retry** - _support maxTries, maxDelay, delayRatio, Backoff Strategy, intermediate callback._
+1. **Circuit Breaker** - _Prevent resource saturation, real-time stats drive for self-healing micro services._
+2. **Fallback** - _Failover: Fail Fast, Fail Silent, Fallback: Static, Stubbed, Cache, Secondary service etc., for graceful degradation_
+3. **Retry** - _support maxTries, maxDelay, delayRatio, Exponential Backoff Strategy, intermediate callbacks for custom control._
 4. **Governor** - _resource overload protection, prevent deliberate denial-of-service attacks._
 	1. rate-limit
 	2. concurrency control
 	
-> Async , Timeout aspects are deprecated with Grails/Ratpack's Promise (GPars, Reactor), RxJava's Observable API.
+> Async , Timeout aspects are deprecated in favour of Grails/Ratpack's Promise (GPars, Reactor), RxJava's Observable API.
 
 ###Release
     ./gradlew :resiliency-aspects:jar -PreleaseVersion=1.0.1
@@ -97,9 +97,11 @@ Access test results at `Resilience/resiliency-aspects/build/reports/tests/index.
 
 
 ###Future
-Grails Promises with Reactor plugin will eliminate need for @Async , @Timeout aspects.
-Reactor Framework allows to switch underling dispatcher implementation of Promises from event-loop(single threaded) to thread pools(multi threaded).
-See the Promises examples in [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
+1. Grails Promises with Reactor plugin will eliminate need for _@Async , @Timeout_ aspects.
+2. __RxJava__ and __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of _Promises_ and _Observables_
+with _calling-thread, thread-pools, NIO,  actors, LMAX RingBuffer,  event-loop_.
+> See the Promises examples in [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
+3. Watch out for [Reactive Streams](https://github.com/reactive-streams/reactive-streams) Spec which is promising to standardize reactive programming model.
 
 ###References
 
