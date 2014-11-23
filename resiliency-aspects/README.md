@@ -103,8 +103,10 @@ Access test results at `Resilience/resiliency-aspects/build/reports/tests/index.
 1. [_Promises_](http://www.html5rocks.com/en/tutorials/es6/promises/) and [_Observables_](http://reactivex.io/) /[_Async Generators_](https://github.com/jhusain/asyncgenerator) provider better async code composability and error communication.
 2. [Grails Promises](http://grails.org/doc/latest/guide/async.html),  [Spring Reactor Promises](https://github.com/reactor/reactor/wiki/Promises), Java 8 _CompletableFuture_ will eliminate need for _@Async , @Timeout_ aspects.
 3. __Event Bus__ is an other way of async code composition ( _Pub-Sub Style_ ) and used for inter-code-fragment communication without blocking  _(Message Passing Pattern)_.
-	> e.g., [_Vert.X_](http://www.cubrid.org/blog/dev-platform/understanding-vertx-architecture-part-2/) Distributed EventBus that can span [backend-to-frontend](https://riaconnection.wordpress.com/2012/08/04/vert-x-io-event-bus-the-quick-intro/), [_Spring Messaging_](https://github.com/zyro23/grails-spring-websocket) Distributed EventBus,  [_Spring Reactor_](https://github.com/reactor/grails-events), [Guavas](http://www.slideshare.net/koneru9999/guavas-event-bus) EventBuses.
-	> Some of them  support Point-to-point and Request-Response style messaging with __Ack__ via  _Promises_  API.
+
+> e.g., [_Vert.X_](http://www.cubrid.org/blog/dev-platform/understanding-vertx-architecture-part-2/) Distributed EventBus that can span [backend-to-frontend](https://riaconnection.wordpress.com/2012/08/04/vert-x-io-event-bus-the-quick-intro/), [_Spring Messaging_](https://github.com/zyro23/grails-spring-websocket) Distributed EventBus,  [_Spring Reactor_](https://github.com/reactor/grails-events), [Guavas](http://www.slideshare.net/koneru9999/guavas-event-bus) EventBuses.
+> Some of them  support Point-to-point and Request-Response style messaging with __Ack__ via  _Promises_  API.
+
 4. __RxJava__ and Spring __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of  _Observables_  and _Promises_
 with _[calling-thread, thread-pools, NIO,  actors, LMAX Disruptor,  event-loop]_.
 
