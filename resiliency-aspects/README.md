@@ -7,13 +7,14 @@ Yet Another Resilience Framework inspired by [Netflix Hystrix](https://github.co
 * A set of resilience annotations that can be applied to java/groovy code via AspectJ weaving or Spring proxy based AOP.
 
 ###Features
-Resiliency Aspects for Java and JavaScript
+Resiliency Aspects for Java and [JavaScript](https://github.com/xmlking/spa-starter-kit/tree/master/app/scripts/resiliency)
 
 1. **Circuit Breaker** - _Prevent resource saturation, help you build real-time stats driven self-healing micro services._
 2. **Fallback** - for graceful degradation.
     1. Failover: _Fail Fast, Fail Silent_
     2. Fallback: _Static, Stubbed, Cache, Secondary service etc.,_
 3. **Retry** - _support maxTries, maxDelay, delayRatio, Exponential Backoff Strategy, intermediate callbacks for custom control._
+	1. Sample [Code](https://github.com/xmlking/spa-starter-kit/blob/master/app/scripts/reactive/EventBus.js#L73)
 4. **Governor** - _resource overload protection, prevent deliberate denial-of-service attacks._
 	1. rate-limit
 	2. concurrency control
@@ -99,13 +100,14 @@ Access test results at `Resilience/resiliency-aspects/build/reports/tests/index.
 
 
 ###Future
-1. Grails Promises with Reactor plugin will eliminate need for _@Async , @Timeout_ aspects.
-2. __RxJava__ and __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of _Promises_ and _Observables_
-with _[calling-thread, thread-pools, NIO,  actors, LMAX RingBuffer,  event-loop]_.
+1. _Promises_ and _Observables_ , [Async Generators](https://github.com/jhusain/asyncgenerator) provider better async code composability and error communication.
+2. Grails Promises with Reactor plugin will eliminate need for _@Async , @Timeout_ aspects.
+3. __RxJava__ and __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of  _Observables_  and _Promises_
+with _[calling-thread, thread-pools, NIO,  actors, LMAX Disruptor,  event-loop]_.
 
-> See the Promises examples in [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
+> See the Promises examples in [GparsService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/GparsService.groovy), [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
 
-3. Watch out for [Reactive Streams](https://github.com/reactive-streams/reactive-streams) Spec which is promising to standardize reactive programming model.
+4. Watch out for [Reactive Streams](https://github.com/reactive-streams/reactive-streams) Spec which is promising to standardize reactive programming model and support _Backpressure_.
 
 ###References
 
