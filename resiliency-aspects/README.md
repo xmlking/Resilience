@@ -100,16 +100,20 @@ Access test results at `Resilience/resiliency-aspects/build/reports/tests/index.
 
 
 ###Future
-1. _Promises_ and _Observables_ , [Async Generators](https://github.com/jhusain/asyncgenerator) provider better async code composability and error communication.
-2. Grails Promises with Reactor plugin will eliminate need for _@Async , @Timeout_ aspects.
-3. __RxJava__ and __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of  _Observables_  and _Promises_
+1. [_Promises_](https://promisesaplus.com/) and [_Observables_](http://reactivex.io/) /[_Async Generators_](https://github.com/jhusain/asyncgenerator) provider better async code composability and error communication.
+2. [Grails Promises](http://grails.org/doc/latest/guide/async.html),  [Spring Reactor Promises](https://github.com/reactor/reactor/wiki/Promises), Java 8 _CompletableFuture_ will eliminate need for _@Async , @Timeout_ aspects.
+3. __Event Bus__ is an other way of async code composition ( _Pub-Sub Style_ ) and used for inter-code-fragment communication without blocking  _(Message Passing Pattern)_.
+	E.g., [_Vert.X_](http://www.cubrid.org/blog/dev-platform/understanding-vertx-architecture-part-2/) Distributed EventBus that can span [backend-to-frontend](https://riaconnection.wordpress.com/2012/08/04/vert-x-io-event-bus-the-quick-intro/), [_Spring Messaging_](https://github.com/zyro23/grails-spring-websocket) Distributed EventBus,  [_Spring Reactor_](https://github.com/reactor/grails-events), [Guavas](http://www.slideshare.net/koneru9999/guavas-event-bus) EventBuses.
+	Some of them  support Point-to-point and Request-Response style messaging with __Ack__ via  _Promises_  API.
+4. __RxJava__ and Spring __Reactor Frameworks__ will allow you to switch underling dispatcher(scheduler) implementation of  _Observables_  and _Promises_
 with _[calling-thread, thread-pools, NIO,  actors, LMAX Disruptor,  event-loop]_.
 
 > See the Promises examples in [GparsService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/GparsService.groovy), [DemoService](/resiliency-roadshow/grails-app/services/com/crossbusiness/resiliency/demo/DemoService.groovy).
 
-4. Watch out for [Reactive Streams](https://github.com/reactive-streams/reactive-streams) Spec which is promising to standardize reactive programming model and support _Backpressure_.
+5. Watch out for [Reactive Streams](https://github.com/reactive-streams/reactive-streams) Spec which is promising to standardize above reactive programming models and support _Backpressure_.
 
 ###References
 
     https://github.com/reactor/reactor/wiki/Promises
     http://gpars.org/1.2.1/guide/guide/single.html
+	http://jaxenter.com/tutorial-gpars-making-parallel-systems-groovy-and-java-friendly-104729.html
