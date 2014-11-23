@@ -60,7 +60,7 @@
 <div class="nav" role="navigation">
     <ul>
         <li>
-            <g:link class="home"><g:message code="default.home.label" /></g:link>
+            <g:link class="home" controller="demo"><g:message code="default.home.label" /></g:link>
         </li>
         <li>
             <g:link class="list" controller="circuitBreaker">Circuit Breakers</g:link>

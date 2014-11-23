@@ -1,6 +1,8 @@
-
 ext.aspectjVersion = aspectJVersion
-
+apply from: file('../gradle/convention.gradle')
+apply from: file('../gradle/maven.gradle')
+apply from: file('../gradle/check.gradle')
+apply from: file('../gradle/license.gradle')
 /**
  * Disable this during build process. we will be only using aspectj compiler for testing source/binary weaving.
  */

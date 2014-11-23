@@ -9,6 +9,7 @@ import org.springframework.core.task.TaskRejectedException
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 
+import java.lang.reflect.UndeclaredThrowableException
 import java.util.concurrent.CancellationException
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Future
@@ -236,7 +237,8 @@ class DemoController {
         }catch(OpenCircuitException oce) {
             render "Error : Circuit Open. Please wait for 80 seconds"
         } catch(Throwable tro) {
-            render "Error : ${tro.undeclaredThrowable}"
+            Throwable t = tro instanceof UndeclaredThrowableException ? tro.undeclaredThrowable : tro
+            render "Error : ${t.toString()}"
             //render "Error : ${tro}"
         }
     }

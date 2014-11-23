@@ -1,0 +1,81 @@
+import org.grails.gradle.plugin.tasks.GrailsTask
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+		classpath "org.grails:grails-gradle-plugin:2.1.1"
+    }
+}
+
+project.ext {
+	warFile = file("target/${project.warName}")
+}
+
+apply plugin: 'grails'
+
+grails {
+    grailsVersion = '2.4.4' // Specifies the Grails version to use
+    groovyVersion = '2.3.7' // Specify the Groovy version to use (should match the version that ships with the above Grails version)
+}
+
+repositories {
+    grails.central() //Adds the Grails Central Repository for resolving Grails plugins (replaces grailsPlugins(), grailsCentral() from BuildConfig.groovy)
+    flatDir {
+        dirs './resiliency-roadshow/lib'
+    }
+}
+
+clean {
+	delete warFile
+}
+
+war {
+	outputFile = warFile
+	env = 'production'
+}
+
+task debug(type: GrailsTask) {
+        command = 'run-app'
+        jvmOptions {
+                jvmArgs '-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,address=5005'
+        }
+}
+
+tasks.withType(GrailsTask) {
+	jvmOptions {
+		minHeapSize = '1g'
+		maxHeapSize = '1g'
+		jvmArgs "-XX:MaxPermSize=512m" 
+	}
+}
+
+dependencies {
+	springloaded 'org.springframework:springloaded:1.2.1.RELEASE@jar' // Specify the Spring Loaded version to use
+	
+	String gebVersion = '0.10.0'
+
+	compile project(':resiliency-aspects') //TODO use maven dependency
+	test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+    test "org.gebish:geb-spock:$gebVersion"
+	
+	def plugins = [
+		[name: 'tomcat', version: '8.0.15', scope: 'bootstrap'],
+		[name: 'scaffolding', version: '2.1.2'],
+		[name: 'cache', version: '1.1.8'],
+		[name: 'asset-pipeline', version: '1.9.9'],
+		[name: 'spring-websocket', version:'1.2.0'],
+		[name: 'jquery', version:'1.11.1', scope: 'runtime'],
+	    [name: 'geb', version: gebVersion, scope: 'test']
+	]
+
+	plugins.each { plugin ->
+		String scope = plugin.scope ?: 'compile'
+		owner."$scope" "org.grails.plugins:${plugin.name}:${plugin.version}"
+	}
+	
+	runtime('org.grails.plugins:hibernate4:4.3.6.1') {
+    		exclude module: 'xml-apis'
+	}
+}

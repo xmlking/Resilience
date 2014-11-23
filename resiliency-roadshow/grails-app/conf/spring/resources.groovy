@@ -1,7 +1,3 @@
-import groovyx.gpars.group.DefaultPGroup
-import groovyx.gpars.scheduler.DefaultPool
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
-
 // Place your Spring DSL code here
 beans = {
     //importBeans 'file:grails-app/conf/spring/resiliency.groovy'
