@@ -9,4 +9,4 @@ gradle run
 gradle debug
 gradle war
 ```
-***Don't run __gradle init__***
+Don't run `gradle init`
